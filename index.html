@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>State 3432 · Rally Ops</title>
+  <style>
+    :root { --bg:#0b1016; --panel:#141c26; --panel2:#1b2633; --line:#2a3848; --text:#e8eef5; --muted:#8ea0b5; --gold:#c9a227; --red:#c0392b; --blue:#2e86ab; --ok:#3ddc97; }
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+    header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:#0e1620;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;gap:10px;flex-wrap:wrap}
+    .badge{background:var(--gold);color:#1b1404;font-weight:700;padding:4px 8px;border-radius:6px}
+    nav button,.btn{background:var(--panel2);color:var(--text);border:1px solid var(--line);padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    nav button.active,.btn.primary{background:var(--gold);color:#1b1404;border-color:var(--gold)}
+    .btn.danger{background:#3a1515;border-color:#6a2a2a;color:#ffb4b4}
+    main{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 60px)}
+    aside{border-right:1px solid var(--line);padding:14px;background:#101822}
+    .search{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+    .filters{display:flex;gap:6px;margin:10px 0}
+    .chip{padding:4px 8px;border-radius:99px;border:1px solid var(--line);cursor:pointer;color:var(--muted)}
+    .chip.on.MRG{background:var(--gold);color:#1b1404}.chip.on.AXE{background:var(--red);color:#fff}.chip.on.TOT{background:var(--blue);color:#fff}
+    .roster{overflow:auto;max-height:70vh;display:flex;flex-direction:column;gap:6px}
+    .player{display:grid;grid-template-columns:46px 1fr;gap:8px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer}
+    .player.selected{outline:2px solid var(--gold)}
+    .tag{font-size:11px;font-weight:700;text-align:center;padding:3px 0;border-radius:4px;color:#fff}
+    .tag.MRG{background:var(--gold);color:#1b1404}.tag.AXE{background:var(--red)}.tag.TOT{background:var(--blue)}
+    .board{padding:16px}
+    .rallies{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .card-h{display:flex;justify-content:space-between;padding:12px;background:var(--panel2)}
+    .slot{display:grid;grid-template-columns:60px 1fr 70px 42px;gap:6px;align-items:center;margin:6px 10px;padding:7px;border:1px dashed var(--line);border-radius:8px;background:#0f1720;cursor:pointer}
+    .slot.lead{border-color:var(--gold);border-style:solid}
+    select,input{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px}
+    .hint{color:var(--muted);font-size:13px}
+    .pickbar{display:none;background:#2a2412;padding:10px 16px;border-bottom:1px solid var(--gold);justify-content:space-between}
+    .pickbar.show{display:flex}
+    @media(max-width:860px){main{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header>
+  <div><span class="badge">3432</span> Rally Ops · SvS · Frost Dragon · Foundry</div>
+  <nav>
+    <button data-event="all" class="active">All</button>
+    <button data-event="SvS">SvS</button>
+    <button data-event="Frost Dragon Tyrant">Frost Dragon</button>
+    <button data-event="Foundry">Foundry</button>
+  </nav>
+</header>
+<div class="pickbar" id="pickbar"><div>Selected: <b id="pickName">-</b></div><button class="btn" id="cancelPick">Cancel</button></div>
+<main>
+<aside>
+  <input class="search" id="q" placeholder="Search player" />
+  <div class="filters">
+    <span class="chip on MRG" data-alli="MRG">MRG</span>
+    <span class="chip on AXE" data-alli="AXE">AXE</span>
+    <span class="chip on TOT" data-alli="TOT">TOT</span>
+  </div>
+  <div class="hint" id="rosterHint">Tap player, then tap a slot</div>
+  <div class="roster" id="roster"></div>
+</aside>
+<section class="board">
+  <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <div><b id="eventTitle">All operations</b><div class="hint">State 3432 leads + joiners</div></div>
+    <div><button class="btn" id="exportBtn">Copy lineup</button> <button class="btn primary" id="newBtn">New rally</button></div>
+  </div>
+  <div class="rallies" id="rallies"></div>
+</section>
+</main>
+<dialog id="dlg">
+  <form method="dialog" style="padding:16px;display:grid;gap:8px;background:#121a24;color:#fff">
+    <b>Create rally</b>
+    <select id="ev"><option>SvS</option><option>Frost Dragon Tyrant</option><option>Foundry</option></select>
+    <select id="tpl">
+      <option value="castle">Castle Rally 40/20/40</option>
+      <option value="garrison">Garrison 50/0/50</option>
+      <option value="fdt">Frost Dragon Lead+5</option>
+      <option value="foundry">Foundry 50/0/50</option>
+    </select>
+    <input id="target" placeholder="Target / note" />
+    <input id="when" type="datetime-local" />
+    <button class="btn primary" id="saveRally" value="default">Create</button>
+  </form>
+</dialog>
+<script src="roster.js"></script>
+<script>
+const TEMPLATES={castle:{slots:8,inf:40,lan:20,mm:40,event:'SvS'},garrison:{slots:8,inf:50,lan:0,mm:50,event:'SvS'},fdt:{slots:6,inf:40,lan:20,mm:40,event:'Frost Dragon Tyrant'},foundry:{slots:6,inf:50,lan:0,mm:50,event:'Foundry'}};
+const state={filterEvent:'all',alli:{MRG:true,AXE:true,TOT:true},q:'',selected:null,rallies:JSON.parse(localStorage.getItem('s3432.rallies')||'[]')};
+const $=s=>document.querySelector(s);
+const save=()=>localStorage.setItem('s3432.rallies',JSON.stringify(state.rallies));
+function setSelected(p){state.selected=p;$('#pickbar').classList.toggle('show',!!p);$('#pickName').textContent=p?('['+p.alliance+'] '+p.name):'-';renderRoster();}
+function renderRoster(){
+  const q=state.q.toLowerCase(); const box=$('#roster'); box.innerHTML='';
+  (window.ROSTER||[]).filter(p=>state.alli[p.alliance] && (!q || p.name.toLowerCase().includes(q))).forEach(p=>{
+    const el=document.createElement('div'); const sel=state.selected&&state.selected.name===p.name;
+    el.className='player'+(sel?' selected':'');
+    el.innerHTML=`<div class="tag ${p.alliance}">${p.alliance}</div><div><b>${p.name}</b><div class="hint">${p.infLvl||'-'}/${p.lanLvl||'-'}/${p.mmLvl||'-'}</div></div>`;
+    el.onclick=()=>setSelected(sel?null:{name:p.name,alliance:p.alliance}); box.appendChild(el);
+  });
+}
+function renderRallies(){
+  const box=$('#rallies'); box.innerHTML='';
+  const list=state.rallies.filter(r=>state.filterEvent==='all'||r.event===state.filterEvent);
+  if(!list.length){box.innerHTML='<p class="hint">Create a rally first.</p>';return;}
+  list.forEach(r=>{
+    const card=document.createElement('article'); card.className='card';
+    const filled=r.slots.filter(s=>s.player).length;
+    card.innerHTML=`<div class="card-h"><div><div class="hint">${r.event}</div><b>${r.target||r.template}</b><div class="hint">${filled}/${r.slots.length}</div></div><button class="btn danger" data-del="${r.id}">X</button></div><div class="slots"></div>`;
+    const slots=card.querySelector('.slots');
+    r.slots.forEach((s,i)=>{
+      const row=document.createElement('div'); row.className='slot'+(i===0?' lead':'');
+      const opts=['<option value="">Select player</option>'].concat((window.ROSTER||[]).map(p=>{
+        const val=p.alliance+'|'+p.name; const cur=(s.alliance||'')+'|'+(s.player||'');
+        return `<option value="${val.replace(/\"/g,'"')}" ${cur===val?'selected':''}>[${p.alliance}] ${p.name}</option>`;
+      }));
+      row.innerHTML=`<div>${i===0?'LEAD':'JOIN '+i}</div><select class="assign">${opts.join('')}</select><div class="hint">${s.inf}/${s.lan}/${s.mm}</div><button class="btn" data-clear="${r.id}:${i}">clr</button>`;
+      row.querySelector('.assign').onchange=ev=>{if(!ev.target.value){s.player='';s.alliance='';}else{const [a,...rest]=ev.target.value.split('|');s.alliance=a;s.player=rest.join('|');}save();renderRallies();};
+      row.onclick=ev=>{if(ev.target.closest('select,button')||!state.selected)return;s.player=state.selected.name;s.alliance=state.selected.alliance;setSelected(null);save();renderRallies();};
+      slots.appendChild(row);
+    });
+    box.appendChild(card);
+  });
+}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.filterEvent=b.dataset.event;$('#eventTitle').textContent=b.dataset.event==='all'?'All operations':b.dataset.event;renderRallies();});
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{state.alli[c.dataset.alli]=!state.alli[c.dataset.alli];c.classList.toggle('on',state.alli[c.dataset.alli]);renderRoster();});
+$('#q').oninput=e=>{state.q=e.target.value;renderRoster();};
+$('#newBtn').onclick=()=>$('#dlg').showModal();
+$('#tpl').onchange=()=>{};
+$('#saveRally').onclick=e=>{e.preventDefault();const k=$('#tpl').value;const t=TEMPLATES[k];const slots=Array.from({length:t.slots},()=>({player:'',alliance:'',inf:t.inf,lan:t.lan,mm:t.mm}));if(k==='castle'){[[40,20,40],[50,0,50],[50,0,50],[50,0,50],[100,0,0],[50,0,50],[50,0,50],[0,0,100]].forEach((m,i)=>{slots[i].inf=m[0];slots[i].lan=m[1];slots[i].mm=m[2];});}state.rallies.unshift({id:Date.now().toString(36),event:$('#ev').value,template:k,target:$('#target').value.trim(),when:$('#when').value,inf:t.inf,lan:t.lan,mm:t.mm,slots});save();$('#dlg').close();renderRallies();};
+document.addEventListener('click',e=>{const del=e.target.closest('[data-del]');if(del&&confirm('Delete rally?')){state.rallies=state.rallies.filter(r=>r.id!==del.dataset.del);save();renderRallies();}const clr=e.target.closest('[data-clear]');if(clr){const [id,idx]=clr.dataset.clear.split(':');const r=state.rallies.find(x=>x.id===id);if(r){r.slots[+idx].player='';r.slots[+idx].alliance='';save();renderRallies();}}});
+$('#exportBtn').onclick=()=>{const text=state.rallies.map(r=>['['+r.event+'] '+(r.target||r.template)].concat(r.slots.map((s,i)=>(i===0?'LEAD':'J'+i)+' '+(s.player||'—'))).join('\n')).join('\n\n');navigator.clipboard.writeText(text||'');};
+$('#cancelPick').onclick=()=>setSelected(null);
+if(!state.rallies.length){[['SvS','castle','Sunfire Castle'],['Frost Dragon Tyrant','fdt','Frost Dragon'],['Foundry','foundry','Foundry']].forEach(([event,template,target],n)=>{const t=TEMPLATES[template];const slots=Array.from({length:t.slots},()=>({player:'',alliance:'',inf:t.inf,lan:t.lan,mm:t.mm}));state.rallies.push({id:'seed'+n,event,template,target,when:'',inf:t.inf,lan:t.lan,mm:t.mm,slots});});save();}
+renderRoster();renderRallies();
+</script>
+</body></html>
