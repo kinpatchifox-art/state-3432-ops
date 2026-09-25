@@ -1,1 +1,100 @@
-LOAD_FROM_DISK_ironhold
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Ironhold - State 3432</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b10;--panel:#10161e;--line:rgba(155,184,199,.16);--text:#e8eef4;--mute:#8aa0b0;--ice:#b7c9d4;--gold:#e8c547;--red:#ef5b4a;--blue:#3aa0d8;--ok:#3dd68c}
+*{box-sizing:border-box}html,body{margin:0;min-height:100dvh;background:var(--bg);color:var(--text);font-family:Outfit,system-ui,sans-serif}
+h1,.serif{font-family:Fraunces,Georgia,serif;letter-spacing:-.03em}
+button,input,select,textarea{font:inherit;color:inherit}
+#gate{min-height:100dvh;display:grid;place-items:center;background:radial-gradient(900px 520px at 50% 18%,#13202c 0%,var(--bg) 55%)}
+.crest{width:56px;height:56px;margin:0 auto 16px;border:1px solid var(--ice);border-radius:50%;display:grid;place-items:center;color:var(--ice)}
+.kicker{letter-spacing:.28em;font-size:11px;color:var(--mute);text-align:center}
+#gate h1{margin:8px 0 6px;font-size:56px;text-align:center}
+.sub{text-align:center;color:var(--mute);margin-bottom:28px}
+.box{width:min(420px,92vw);background:rgba(16,22,30,.92);border:1px solid var(--line);border-radius:18px;padding:18px}
+label{display:block;font-size:12px;color:var(--mute);margin:10px 0 6px}
+input,select,textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#0c1218}
+.enter{width:100%;margin-top:14px;border:0;border-radius:10px;padding:12px;background:var(--ice);color:#0b1218;font-weight:600;cursor:pointer}
+.err{color:#ff8b8b;font-size:12px;min-height:16px}
+header{position:sticky;top:0;z-index:30;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(7,11,16,.92);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:34px;height:34px;border:1px solid var(--ice);border-radius:50%;display:grid;place-items:center;color:var(--ice);font-size:11px}
+nav{display:flex;flex-wrap:wrap;gap:4px;background:var(--panel);padding:4px;border-radius:12px;border:1px solid var(--line)}
+nav button{border:0;background:0;color:var(--mute);padding:8px 12px;border-radius:9px;cursor:pointer;font-weight:600}
+nav button.active{background:var(--ice);color:#0b1218}
+.clock{font:700 22px Fraunces,serif}.hint{color:var(--mute);font-size:12px;line-height:1.45}
+.wrap{padding:16px 18px 40px}.lobby{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.tile,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.tile h3,.card h3{margin:0 0 6px;font-size:20px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{border:1px solid var(--line);background:#0c1218;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
+.chip.on{background:var(--ice);color:#0b1218;border:0}
+.mapwrap{display:grid;grid-template-columns:1fr 320px;gap:14px}
+svg.map{width:100%;max-height:520px;background:#0a1016;border:1px solid var(--line);border-radius:16px}
+.hex{cursor:pointer;stroke:#2a3a48;stroke-width:1.2}.hex.ours{fill:#1b3a2a}.hex.enemy{fill:#3a1b1f}.hex.neutral{fill:#18202a}.hex.sel{stroke:var(--ice);stroke-width:2.4}
+.slot{display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:center;margin:6px 0;padding:7px;border-radius:10px;background:#0c1218;border:1px solid var(--line)}
+.slot.lead{border-color:rgba(183,201,212,.45)}
+.plist{max-height:62vh;overflow:auto;display:flex;flex-direction:column;gap:6px}
+.rowp{display:grid;grid-template-columns:42px 1fr;gap:8px;padding:8px;border-radius:12px;border:1px solid var(--line);background:#0c1218}
+.tag{height:42px;border-radius:9px;display:grid;place-items:center;font-size:10px;font-weight:800}
+.tag.MRG{background:var(--gold);color:#1a1403}.tag.AXE{background:var(--red);color:#fff}.tag.TOT{background:var(--blue);color:#fff}
+.pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.pill{font-size:10px;padding:2px 6px;border-radius:999px;background:#1b2430}
+@media(max-width:980px){.mapwrap{grid-template-columns:1fr}}
+</style></head><body>
+<div id="gate"><div><div class="crest"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/></svg></div>
+<div class="kicker">STATE 3432</div><h1>Ironhold</h1><div class="sub">State 3432<br>State vs State war room</div>
+<div class="box"><label>Chief name</label><input id="chief" placeholder="Your name"/><label>Access code</label><input id="code" type="password"/><div class="err" id="gerr"></div><button class="enter" id="enterBtn">Enter the war room</button></div></div></div>
+<div id="app" style="display:none"><header><div class="brand"><div class="logo">32</div><div><b class="serif">Ironhold</b><div class="hint" id="who"></div></div></div>
+<nav><button data-tab="lobby" class="active">Lobby</button><button data-tab="castle">Castle</button><button data-tab="rallies">Rallies</button><button data-tab="fdt">FDT</button><button data-tab="foundry">Foundry</button><button data-tab="intel">Intel</button></nav>
+<div><div class="clock" id="clk">--:--:--</div><div class="hint" id="clkHint">Battle not started</div></div></header>
+<div class="wrap" id="view"></div></div>
+<script src="roster.js?v=18"></script>
+<script>
+const CODE='3432',KEY='s3432.ironhold.v1';
+const BLD=[{id:'north',title:'Defense turret',short:'DEF',q:-3,r:-3,kind:'turret'},{id:'west',title:'Attack turret',short:'ATK',q:-3,r:3,kind:'turret'},{id:'east',title:'Lethality turret',short:'LET',q:3,r:-3,kind:'turret'},{id:'south',title:'Health turret',short:'HP',q:3,r:3,kind:'turret'},{id:'castle',title:'Capital',short:'CAP',q:0,r:0,kind:'castle'}];
+const $=s=>document.querySelector(s);
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+function emptyRooms(){const o={};BLD.forEach(b=>o[b.id]={side:'ours',occ:Array(b.kind==='castle'?10:6).fill('')});return o}
+const data=Object.assign({tab:'lobby',sel:'castle',enemy:'',intel:'',clockEnd:0,prepUntil:0,startedAt:0,rooms:emptyRooms(),rallies:[],fdt:{brief:'Top 4 first. After 4: any strong T11. 3 rallies / wave. 30s gap.',rallies:[]},foundry:{note:'Furnace +/-3. Stay on assigned nodes.',rallies:[]},cities:[]},load());
+if(!data.rooms||!data.rooms.castle)data.rooms=emptyRooms();
+if(!data.rallies.length){['Sunfire R1','Sunfire R2','Sunfire R3'].forEach((t,i)=>data.rallies.push({target:t,min:5,inf:i===1?50:40,lan:i===1?0:20,mm:i===1?50:40,slots:Array(8).fill('')}));}
+if(!data.fdt.rallies.length)[1,2,3].forEach(i=>data.fdt.rallies.push({target:'FDT R'+i,slots:Array(8).fill('')}));
+if(!data.foundry.rallies.length)[1,2].forEach(i=>data.foundry.rallies.push({target:'Foundry '+i,slots:Array(6).fill('')}));
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function names(){return (window.ROSTER||[]).map(p=>p.name)}
+function used(){const s=new Set();Object.values(data.rooms).forEach(r=>r.occ.forEach(n=>n&&s.add(n)));data.rallies.forEach(r=>r.slots.forEach(n=>n&&s.add(n)));data.fdt.rallies.forEach(r=>r.slots.forEach(n=>n&&s.add(n)));data.foundry.rallies.forEach(r=>r.slots.forEach(n=>n&&s.add(n)));return s}
+function sel(cur){const u=used();return ['<option value="">-</option>'].concat(names().filter(n=>n===cur||!u.has(n)).map(n=>'<option '+(n===cur?'selected':'')+'>'+n.replace(/</g,'')+'</option>')).join('')}
+function hexPoly(cx,cy,a){const pts=[];for(let i=0;i<6;i++){const ang=Math.PI/180*(60*i-30);pts.push((cx+a*Math.cos(ang)).toFixed(1)+','+(cy+a*Math.sin(ang)).toFixed(1));}return pts.join(' ')}
+function hexPos(q,r){return {x:260+Math.sqrt(3)*(q+r/2)*18,y:250+1.5*r*18}}
+function mapSvg(){let s='<svg class="map" viewBox="0 0 520 500"><text x="260" y="28" text-anchor="middle" fill="#8aa0b0" font-size="12">3432 Sunfire map - tap a building</text>';BLD.forEach(b=>{const p=hexPos(b.q,b.r);const a=b.kind==='castle'?54:38;const side=data.rooms[b.id].side;s+='<polygon data-b="'+b.id+'" class="hex '+side+(data.sel===b.id?' sel':'')+'" points="'+hexPoly(p.x,p.y,a)+'"/><text x="'+p.x+'" y="'+(p.y-4)+'" text-anchor="middle" fill="#e8eef4" font-size="'+(b.kind==='castle'?13:11)+'" font-weight="700">'+b.short+'</text><text x="'+p.x+'" y="'+(p.y+14)+'" text-anchor="middle" fill="#8aa0b0" font-size="10">'+data.rooms[b.id].occ.filter(Boolean).length+' in</text>';});return s+'</svg>'}
+function roomPanel(){const b=BLD.find(x=>x.id===data.sel)||BLD[4];const r=data.rooms[b.id];return '<article class="card"><h3 class="serif">'+b.title+'</h3><div class="hint">Held: '+r.side+' - '+r.occ.filter(Boolean).length+' / '+r.occ.length+'</div><div class="row"><span class="chip '+(r.side==='ours'?'on':'')+'" data-side="ours">Ours</span><span class="chip '+(r.side==='enemy'?'on':'')+'" data-side="enemy">Enemy</span><span class="chip '+(r.side==='neutral'?'on':'')+'" data-side="neutral">Neutral</span></div>'+r.occ.map((n,i)=>'<div class="slot '+(i===0?'lead':'')+'"><div>'+(i===0?(b.kind==='castle'?'CAPTAIN':'LEAD'):'SLOT '+(i+1))+'</div><select data-occ="'+b.id+'" data-i="'+i+'">'+sel(n)+'</select></div>').join('')+'</article>'}
+function rallyCards(list,kind){return list.map((r,ri)=>'<article class="card"><h3 class="serif">'+r.target+'</h3>'+(r.min?'<div class="hint">'+r.min+' min fill - '+r.inf+'/'+r.lan+'/'+r.mm+'</div>':'')+r.slots.map((n,i)=>'<div class="slot '+(i===0?'lead':'')+'"><div>'+(i===0?'LEAD':'JOIN '+(i+1))+'</div><select data-'+kind+'="'+ri+'" data-i="'+i+'">'+sel(n)+'</select></div>').join('')+'</article>').join('')}
+function rosterCol(){return '<aside class="card"><h3 class="serif">Our leads</h3><div class="plist">'+(window.ROSTER||[]).map(p=>'<div class="rowp"><div class="tag '+p.alliance+'">'+p.alliance+'</div><div>'+p.name+'<div class="pills"><span class="pill">I '+p.infFc+' '+p.infLvl+'</span><span class="pill">L '+p.lanFc+' '+p.lanLvl+'</span><span class="pill">M '+p.mmFc+' '+p.mmLvl+'</span></div></div></div>').join('')+'</div></aside>'}
+function lobby(){const leads=(window.ROSTER||[]).length;return '<div class="lobby"><article class="tile" data-go="castle"><h3 class="serif">Sunfire diamond</h3><div class="hint">Cat 30s castle lead - open Castle for the full map</div><div class="row"><button class="enter" style="width:auto;margin:0" data-go="castle">Open map</button></div></article><article class="tile" data-go="castle"><h3 class="serif">Live hive</h3><div class="hint">4 turrets + Capital. Tap a hex to occupy.</div></article><article class="tile" data-go="rallies"><h3 class="serif">Rallies</h3><div class="hint">3 rallies / wave. 30s gap. 5 min fill then march.</div></article><article class="tile" data-go="fdt"><h3 class="serif">Pet / FDT</h3><div class="hint">Oracle RL1-RL6 - Frost Dragon Tyrant</div></article><article class="tile" data-go="intel"><h3 class="serif">Intel</h3><div class="hint">Call enemy incoming: name + building + rally size.</div></article><article class="tile"><h3 class="serif">Sheets</h3><div class="hint">'+leads+' leads loaded - MRG / AXE / TOT</div></article></div>'}
+function render(){const v=$('#view');
+if(data.tab==='lobby')v.innerHTML=lobby();
+else if(data.tab==='castle')v.innerHTML='<div class="mapwrap">'+mapSvg()+roomPanel()+'</div>';
+else if(data.tab==='rallies')v.innerHTML='<div class="mapwrap">'+rosterCol()+'<div class="lobby">'+rallyCards(data.rallies,'rally')+'</div></div>';
+else if(data.tab==='fdt')v.innerHTML='<article class="card" style="margin-bottom:12px"><h3 class="serif">FDT brief</h3><textarea id="fbrief" rows="3">'+data.fdt.brief+'</textarea></article><div class="lobby">'+rallyCards(data.fdt.rallies,'fdt')+'</div>';
+else if(data.tab==='foundry')v.innerHTML='<article class="card" style="margin-bottom:12px"><h3 class="serif">Foundry</h3><textarea id="fnote" rows="2">'+data.foundry.note+'</textarea></article><div class="lobby">'+rallyCards(data.foundry.rallies,'foundry')+'</div>';
+else v.innerHTML='<div class="lobby"><article class="card"><h3 class="serif">Battle clock</h3><div class="hint">Prep 5m. Castle window 5h. Hold 2.5h to lock president. Alliance skill 30 min CD. 3 free TPs. Furnace +/-3.</div><label>Enemy state</label><input id="enemy" value="'+(data.enemy||'')+'"/><label>Minutes</label><input id="mins" type="number" value="30"/><div class="row"><button class="enter" style="width:auto;margin:0" id="startClk">Start battle</button><button class="enter" style="width:auto;margin:0;background:#1b2430;color:var(--text)" id="stopClk">Stop</button></div></article><article class="card"><h3 class="serif">Intel</h3><textarea id="intel" rows="14">'+(data.intel||'')+'</textarea></article></div>';
+v.querySelectorAll('[data-go]').forEach(el=>el.onclick=()=>{data.tab=el.dataset.go;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===data.tab));save();render();});
+v.querySelectorAll('polygon[data-b]').forEach(el=>el.onclick=()=>{data.sel=el.dataset.b;save();render();});
+v.querySelectorAll('[data-side]').forEach(el=>el.onclick=()=>{data.rooms[data.sel].side=el.dataset.side;save();render();});
+v.querySelectorAll('select[data-occ]').forEach(el=>el.onchange=()=>{data.rooms[el.dataset.occ].occ[+el.dataset.i]=el.value;save();render();});
+v.querySelectorAll('select[data-rally]').forEach(el=>el.onchange=()=>{data.rallies[+el.dataset.rally].slots[+el.dataset.i]=el.value;save();render();});
+v.querySelectorAll('select[data-fdt]').forEach(el=>el.onchange=()=>{data.fdt.rallies[+el.dataset.fdt].slots[+el.dataset.i]=el.value;save();render();});
+v.querySelectorAll('select[data-foundry]').forEach(el=>el.onchange=()=>{data.foundry.rallies[+el.dataset.foundry].slots[+el.dataset.i]=el.value;save();render();});
+const fb=$('#fbrief');if(fb)fb.oninput=()=>{data.fdt.brief=fb.value;save();};
+const fn=$('#fnote');if(fn)fn.oninput=()=>{data.foundry.note=fn.value;save();};
+const en=$('#enemy');if(en)en.oninput=()=>{data.enemy=en.value;save();};
+const intel=$('#intel');if(intel)intel.oninput=()=>{data.intel=intel.value;save();};
+const st=$('#startClk');if(st)st.onclick=()=>{const m=+$('#mins').value||30;data.startedAt=Date.now();data.clockEnd=Date.now()+m*60000;data.prepUntil=Date.now()+5*60000;save();tick();};
+const sp=$('#stopClk');if(sp)sp.onclick=()=>{data.clockEnd=0;data.startedAt=0;save();tick();};}
+function fmt(ms){if(ms<=0)return '00:00:00';const s=Math.floor(ms/1000);return String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function tick(){const el=$('#clk'),h=$('#clkHint');if(!el)return;if(!data.clockEnd){el.textContent='--:--:--';if(h)h.textContent='Battle not started';return;}const now=Date.now();el.textContent=fmt(data.clockEnd-now);if(h){if(data.prepUntil&&now<data.prepUntil)h.textContent='Prep '+fmt(data.prepUntil-now)+' - then turrets open';else if(now<data.clockEnd)h.textContent=(data.enemy?('3432 vs '+data.enemy+' - '):'')+'Castle window';else h.textContent='Window over - report hold';}}
+setInterval(tick,1000);
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');data.tab=b.dataset.tab;save();render();});
+function openRoom(name){$('#gate').style.display='none';$('#app').style.display='block';$('#who').textContent=name+' - 3432';render();tick();}
+$('#enterBtn').onclick=()=>{const n=$('#chief').value.trim(),c=$('#code').value.trim();if(!n){$('#gerr').textContent='Write your chief name';return;}if(c!==CODE){$('#gerr').textContent='Wrong access code';return;}localStorage.setItem('s3432.chief',n);openRoom(n);};
+const saved=localStorage.getItem('s3432.chief');if(saved)openRoom(saved);
+</script></body></html>
