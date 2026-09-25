@@ -1,49 +1,63 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>3432 Rally Ops</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>3432 War Room</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07090d;--s:#0e131b;--c:#151c27;--c2:#1c2533;--ln:rgba(255,255,255,.08);--tx:#f3f6fb;--mu:#8b9bb0;--g:#e8c547;--r:#ef5b4a;--b:#3aa0d8}
-*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(1200px 600px at 10% -10%,#182033 0%,var(--bg) 45%);color:var(--tx);font-family:DM Sans,system-ui,sans-serif}
-header{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;backdrop-filter:blur(16px);background:rgba(7,9,13,.78);border-bottom:1px solid var(--ln)}
-.brand{display:flex;align-items:center;gap:10px}.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--g),#9a7a16);color:#1a1403;font-weight:800;display:grid;place-items:center}
-nav{display:flex;gap:6px;background:var(--c);padding:4px;border-radius:12px;border:1px solid var(--ln)}
-nav button,.btn{border:0;background:transparent;color:var(--mu);padding:8px 12px;border-radius:9px;cursor:pointer;font-weight:700;font-family:inherit}
-nav button.active{background:var(--g);color:#1a1403}
-.btn{background:var(--c2);color:var(--tx);border:1px solid var(--ln)}.btn.ok{background:var(--g);color:#1a1403;border:0}.btn.no{background:#3a1518;color:#ffb4b4}
-main{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 64px)}
-aside{padding:16px;border-right:1px solid var(--ln)}.search{width:100%;padding:11px;border-radius:12px;border:1px solid var(--ln);background:var(--c);color:var(--tx);font:inherit}
-.chips{display:flex;gap:6px;margin:12px 0}.chip{padding:5px 10px;border-radius:999px;border:1px solid var(--ln);color:var(--mu);cursor:pointer;font-size:12px;font-weight:700}
+:root{--bg:#070b10;--c:#10161e;--c2:#161d27;--ln:rgba(155,184,199,.16);--tx:#e8eef4;--mu:#8aa0b0;--ice:#b7c9d4;--g:#e8c547;--r:#ef5b4a;--b:#3aa0d8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100dvh;background:var(--bg);color:var(--tx);font-family:Outfit,system-ui,sans-serif}
+h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif;letter-spacing:-.03em;font-weight:700}
+#gate{min-height:100dvh;display:grid;place-items:center;padding:24px;background:radial-gradient(900px 500px at 50% 20%,#13202c 0%,var(--bg) 55%)}
+.crest{width:54px;height:54px;margin:0 auto 18px;border:1px solid var(--ice);border-radius:50%;display:grid;place-items:center;color:var(--ice)}
+.kicker{letter-spacing:.28em;font-size:11px;color:var(--mu);text-align:center}
+#gate h1{margin:10px 0 4px;font-size:52px;text-align:center}
+.sub{text-align:center;color:var(--mu);font-size:14px;margin-bottom:28px}
+.box{width:min(420px,92vw);background:rgba(16,22,30,.88);border:1px solid var(--ln);border-radius:18px;padding:18px}
+.box label{display:block;font-size:12px;color:var(--mu);margin:8px 0 6px}
+.box input{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--ln);background:#0c1218;color:var(--tx);font:inherit}
+.enter{width:100%;margin-top:14px;border:0;border-radius:10px;padding:12px;background:var(--ice);color:#0b1218;font-weight:600;cursor:pointer}
+.err{color:#ff8b8b;font-size:12px;min-height:16px;margin-top:8px}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:rgba(7,11,16,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--ln)}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:32px;height:32px;border:1px solid var(--ice);border-radius:50%;display:grid;place-items:center;font-size:11px;color:var(--ice)}
+nav{display:flex;gap:4px;background:var(--c);padding:4px;border-radius:12px;border:1px solid var(--ln)}
+nav button,.btn{border:0;background:transparent;color:var(--mu);padding:8px 12px;border-radius:9px;cursor:pointer;font:inherit;font-weight:600}
+nav button.active{background:var(--ice);color:#0b1218}
+.btn{background:var(--c2);color:var(--tx);border:1px solid var(--ln)}.btn.ok{background:var(--ice);color:#0b1218;border:0}.btn.no{background:#3a1518;color:#ffb4b4}
+main{display:grid;grid-template-columns:320px 1fr;min-height:calc(100dvh - 58px)}
+aside{padding:16px;border-right:1px solid var(--ln)}
+.search{width:100%;padding:11px;border-radius:12px;border:1px solid var(--ln);background:var(--c);color:var(--tx);font:inherit}
+.chips{display:flex;gap:6px;margin:12px 0}.chip{padding:5px 10px;border-radius:999px;border:1px solid var(--ln);color:var(--mu);cursor:pointer;font-size:12px;font-weight:600}
 .chip.on.MRG{background:var(--g);color:#1a1403;border:0}.chip.on.AXE{background:var(--r);color:#fff;border:0}.chip.on.TOT{background:var(--b);color:#fff;border:0}
-.plist{display:flex;flex-direction:column;gap:8px;max-height:calc(100vh - 230px);overflow:auto}
+.plist{display:flex;flex-direction:column;gap:8px;max-height:calc(100vh - 220px);overflow:auto}
 .rowp{display:grid;grid-template-columns:42px 1fr;gap:8px;padding:10px;border-radius:14px;background:var(--c);border:1px solid var(--ln)}.rowp.used{opacity:.38}
 .tag{height:42px;border-radius:10px;display:grid;place-items:center;font-size:10px;font-weight:800;color:#fff}
 .tag.MRG{background:var(--g);color:#1a1403}.tag.AXE{background:var(--r)}.tag.TOT{background:var(--b)}
-.nm{font-size:13px;font-weight:800}.pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.pill{font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px}
+.nm{font-size:13px;font-weight:600}.pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.pill{font-size:10px;font-weight:700;padding:3px 7px;border-radius:999px}
 .p8{background:rgba(61,214,140,.16);color:#7dffbf}.p7{background:rgba(232,197,71,.14);color:#f4d56a}.p10{background:rgba(255,255,255,.06);color:#c5d0de}
-.board{padding:18px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:14px}
+.board{padding:18px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px}
 .card{background:var(--c);border:1px solid var(--ln);border-radius:18px}
 .hd{padding:14px;display:flex;justify-content:space-between}.hint{color:var(--mu);font-size:12px}
-.ratio{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 14px 10px}.ratio label{font-size:10px;color:var(--mu);font-weight:700;display:grid;gap:4px}
-.slot{display:grid;grid-template-columns:62px 1fr 92px;gap:8px;align-items:center;margin:8px 14px;padding:8px;border-radius:12px;background:#0e131b;border:1px solid var(--ln)}
-.slot.lead{border-color:rgba(232,197,71,.45)}
-select,input{background:#1c2533;color:var(--tx);border:1px solid var(--ln);border-radius:10px;padding:8px;font:inherit;width:100%}
+.ratio{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 14px 10px}.ratio label{font-size:10px;color:var(--mu);font-weight:600;display:grid;gap:4px}
+.slot{display:grid;grid-template-columns:62px 1fr 96px;gap:8px;align-items:center;margin:8px 14px;padding:8px;border-radius:12px;background:#0c1218;border:1px solid var(--ln)}
+.slot.lead{border-color:rgba(183,201,212,.4)}
+select,input{background:var(--c2);color:var(--tx);border:1px solid var(--ln);border-radius:10px;padding:8px;font:inherit;width:100%}
 @media(max-width:900px){main{grid-template-columns:1fr}}
 </style></head><body>
-<header><div class="brand"><div class="logo">32</div><b>State 3432 Ops</b></div>
+<div id="gate"><div><div class="crest">32</div><div class="kicker">STATE 3432</div><h1>Ironhold</h1><div class="sub">State 3432<br>State vs State war room</div>
+<div class="box"><label>Chief name</label><input id="chief" placeholder="Your name"/><label>Access code</label><input id="code" type="password" placeholder="Code"/><div class="err" id="gerr"></div><button class="enter" id="enterBtn">Enter the war room</button></div></div></div>
+<div id="app" style="display:none"><header><div class="brand"><div class="logo">32</div><div><b class="serif">Ironhold</b><div class="hint" id="who"></div></div></div>
 <nav><button data-event="all" class="active">All</button><button data-event="SvS">SvS</button><button data-event="Frost Dragon Tyrant">FDT</button><button data-event="Foundry">Foundry</button></nav>
 <div style="display:flex;gap:8px"><button class="btn" id="exportBtn">Copy</button><button class="btn ok" id="newBtn">New rally</button></div></header>
-<main><aside><input class="search" id="q" placeholder="Search"/>
+<main><aside><input class="search" id="q" placeholder="Search player"/>
 <div class="chips"><span class="chip on MRG" data-alli="MRG">MRG</span><span class="chip on AXE" data-alli="AXE">AXE</span><span class="chip on TOT" data-alli="TOT">TOT</span></div>
-<div class="plist" id="roster"></div></aside>
-<section class="board"><div class="grid" id="rallies"></div></section></main>
-<dialog id="dlg"><form method="dialog" style="padding:16px;display:grid;gap:8px;background:#121924;color:#fff"><b>New rally</b>
+<div class="plist" id="roster"></div></aside><section class="board"><div class="grid" id="rallies"></div></section></main></div>
+<dialog id="dlg"><form method="dialog" style="padding:16px;display:grid;gap:8px;background:#10161e;color:#e8eef4;border:0;min-width:280px"><b class="serif">New rally</b>
 <select id="ev"><option>SvS</option><option>Frost Dragon Tyrant</option><option>Foundry</option></select>
 <select id="tpl"><option value="r1">R1 elite</option><option value="r2">R2 elite</option><option value="r3">R3 mix</option></select>
-<input id="target" placeholder="Target"/><label>Cap <input id="cap" type="number" value="8"/></label>
+<input id="target" placeholder="Target"/><label class="hint">Cap <input id="cap" type="number" value="8"/></label>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><input id="inf" type="number" value="40"/><input id="lan" type="number" value="20"/><input id="mm" type="number" value="40"/></div>
-<button class="btn ok" id="saveRally" value="default">Create</button></form></dialog>
-<script src="roster.js?v=14"></script>
+<button class="enter" id="saveRally" value="default">Create</button></form></dialog>
+<script src="roster.js?v=15"></script>
 <script>
+const CODE='3432';
 const TOP=['khalifa','joker','buabdullah','abulamar','fahad506','dracarys','sindbad','\u0635\u0646\u062f\u064a\u062f','nuer515','faisal'];
 const KEY='s3432.rallies.v5';
 const TPL={r1:{rule:'elite',inf:40,lan:20,mm:40,cap:8,event:'SvS',mixes:[[40,20,40],[50,0,50],[50,0,50],[50,0,50],[100,0,0],[50,0,50],[50,0,50],[0,0,100]]},
@@ -66,12 +80,13 @@ function usedNames(){const s=new Set();state.rallies.forEach(r=>r.slots.forEach(
 function pool(r,ri,si,current){const used=usedNames();return (window.ROSTER||[]).filter(p=>{if(p.name!==current&&used.has(p.name))return false;if(si===0)return isTop(p);const rule=r.rule||(ri<2?'elite':'mix');if(rule==='elite')return prio(p)<=2;return prio(p)<=10;}).sort((a,b)=>prio(a)-prio(b)||a.name.localeCompare(b.name));}
 function renderRoster(){const q=state.q.toLowerCase(),used=usedNames(),box=$('#roster');box.innerHTML='';(window.ROSTER||[]).filter(p=>state.alli[p.alliance]&&(!q||p.name.toLowerCase().includes(q))).sort((a,b)=>prio(a)-prio(b)).forEach(p=>{const el=document.createElement('div');el.className='rowp'+(used.has(p.name)?' used':'');el.innerHTML='<div class="tag '+p.alliance+'">'+p.alliance+'</div><div><div class="nm">'+p.name+(isTop(p)?' \u2605':'')+'</div><div class="pills">'+tagLine('I',p.infFc,p.infLvl)+tagLine('L',p.lanFc,p.lanLvl)+tagLine('M',p.mmFc,p.mmLvl)+(best(p).full?'<span class="pill p8">FULL</span>':'')+'</div></div>';box.appendChild(el);});}
 function renderRallies(){const box=$('#rallies');box.innerHTML='';state.rallies.map((r,i)=>({r,i})).filter(x=>state.ev==='all'||x.r.event===state.ev).forEach(({r,i})=>{const filled=r.slots.filter(s=>s.player).length;const card=document.createElement('article');card.className='card';
-card.innerHTML='<div class="hd"><div><div class="hint">'+r.event+' R'+(i+1)+'</div><b>'+(r.target||r.template)+'</b><div class="hint">'+filled+'/'+r.slots.length+' \u00b7 '+rallyAvg(r)+'</div></div><button class="btn no" data-del="'+r.id+'">X</button></div><div class="ratio"><label>CAP<input type="number" value="'+r.slots.length+'" data-cap="'+r.id+'"></label><label>INF<input type="number" value="'+r.inf+'" data-ratio="'+r.id+':inf"></label><label>LAN<input type="number" value="'+r.lan+'" data-ratio="'+r.id+':lan"></label><label>MM<input type="number" value="'+r.mm+'" data-ratio="'+r.id+':mm"></label></div><div class="slots"></div>';
+card.innerHTML='<div class="hd"><div><div class="hint">'+r.event+' R'+(i+1)+'</div><b class="serif">'+(r.target||r.template)+'</b><div class="hint">'+filled+'/'+r.slots.length+' \u00b7 '+rallyAvg(r)+'</div></div><button class="btn no" data-del="'+r.id+'">X</button></div><div class="ratio"><label>CAP<input type="number" value="'+r.slots.length+'" data-cap="'+r.id+'"></label><label>INF<input type="number" value="'+r.inf+'" data-ratio="'+r.id+':inf"></label><label>LAN<input type="number" value="'+r.lan+'" data-ratio="'+r.id+':lan"></label><label>MM<input type="number" value="'+r.mm+'" data-ratio="'+r.id+':mm"></label></div><div class="slots"></div>';
 const sl=card.querySelector('.slots');
 r.slots.forEach((s,si)=>{const list=pool(r,i,si,s.player);const opts=['<option value="">Select</option>'].concat(list.map(p=>{const val=p.alliance+'|'+p.name,cur=(s.alliance||'')+'|'+(s.player||'');return '<option value="'+val.replace(/"/g,'&quot;')+'" '+(cur===val?'selected':'')+'>'+p.name+'</option>';}));const p=s.player&&(window.ROSTER||[]).find(x=>x.name===s.player);const ml=p?marchLine(p,s):null;const extra=ml?('FC'+ml.fc+' T'+ml.lv+' '+ml.k):'';const row=document.createElement('div');row.className='slot'+(si===0?' lead':'');
 row.innerHTML='<div>'+(si===0?'LEAD':'JOIN '+si)+'</div><select>'+opts.join('')+'</select><div class="hint">'+s.inf+'/'+s.lan+'/'+s.mm+(extra?'<br>'+extra:'')+'</div>';
 row.querySelector('select').onchange=ev=>{if(!ev.target.value){s.player='';s.alliance='';}else{const[a,...rest]=ev.target.value.split('|');s.alliance=a;s.player=rest.join('|');const pl=(window.ROSTER||[]).find(x=>x.name===s.player);const rec=pl&&suggestedRatio(pl);if(rec&&si!==0){s.inf=rec[0];s.lan=rec[1];s.mm=rec[2];}}save();renderRallies();renderRoster();};
 sl.appendChild(row);});box.appendChild(card);});}
+function bootApp(){
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.ev=b.dataset.event;renderRallies();});
 document.querySelectorAll('[data-alli]').forEach(c=>c.onclick=()=>{state.alli[c.dataset.alli]=!state.alli[c.dataset.alli];c.classList.toggle('on',!!state.alli[c.dataset.alli]);renderRoster();});
 $('#q').oninput=e=>{state.q=e.target.value;renderRoster();};
@@ -80,7 +95,11 @@ $('#tpl').onchange=()=>{const t=TPL[$('#tpl').value];$('#inf').value=t.inf;$('#l
 $('#saveRally').onclick=e=>{e.preventDefault();const k=$('#tpl').value,t=TPL[k];const cap=Math.max(2,+$('#cap').value||8);const inf=+$('#inf').value,lan=+$('#lan').value,mm=+$('#mm').value;const slots=Array.from({length:cap},()=>({player:'',alliance:'',inf,lan,mm}));(t.mixes||[]).forEach((m,i)=>{if(slots[i]){slots[i].inf=m[0];slots[i].lan=m[1];slots[i].mm=m[2];}});state.rallies.push({id:Date.now().toString(36),event:$('#ev').value,template:k,target:$('#target').value.trim(),rule:t.rule,inf,lan,mm,mixes:t.mixes,slots});save();$('#dlg').close();renderRallies();};
 document.addEventListener('change',e=>{const cap=e.target.dataset.cap;if(cap){const r=state.rallies.find(x=>x.id===cap);const n=Math.max(2,+e.target.value||8);while(r.slots.length<n)r.slots.push({player:'',alliance:'',inf:r.inf,lan:r.lan,mm:r.mm});while(r.slots.length>n)r.slots.pop();save();renderRallies();}const ratio=e.target.dataset.ratio;if(ratio){const[id,key]=ratio.split(':');const r=state.rallies.find(x=>x.id===id);r[key]=+e.target.value||0;save();renderRallies();}});
 document.addEventListener('click',e=>{const del=e.target.closest('[data-del]');if(del&&confirm('Delete?')){state.rallies=state.rallies.filter(r=>r.id!==del.dataset.del);save();renderRallies();renderRoster();}});
-$('#exportBtn').onclick=()=>{navigator.clipboard.writeText(state.rallies.map((r,i)=>r.target+' '+rallyAvg(r)+'\n'+r.slots.map((s,j)=>(j?'J'+j:'LEAD')+' '+(s.player||'-')+' '+s.inf+'/'+s.lan+'/'+s.mm).join('\n')).join('\n\n'));};
+$('#exportBtn').onclick=()=>{navigator.clipboard.writeText(state.rallies.map((r)=>r.target+' '+rallyAvg(r)+'\n'+r.slots.map((s,j)=>(j?'J'+j:'LEAD')+' '+(s.player||'-')+' '+s.inf+'/'+s.lan+'/'+s.mm).join('\n')).join('\n\n'));};
 if(!state.rallies.length){[['r1','Sunfire R1'],['r2','Sunfire R2'],['r3','Sunfire R3']].forEach(([k,target])=>{const t=TPL[k];const slots=Array.from({length:t.cap},()=>({player:'',alliance:'',inf:t.inf,lan:t.lan,mm:t.mm}));(t.mixes||[]).forEach((m,i)=>{if(slots[i]){slots[i].inf=m[0];slots[i].lan=m[1];slots[i].mm=m[2];}});state.rallies.push({id:'s'+k,event:'SvS',template:k,target,rule:t.rule,inf:t.inf,lan:t.lan,mm:t.mm,mixes:t.mixes,slots});});save();}
 renderRoster();renderRallies();
+}
+function openRoom(name){$('#gate').style.display='none';$('#app').style.display='block';$('#who').textContent=name||'Chief';bootApp();}
+$('#enterBtn').onclick=()=>{const name=$('#chief').value.trim();const code=$('#code').value.trim();if(!name){$('#gerr').textContent='Write your chief name';return;}if(code!==CODE){$('#gerr').textContent='Wrong access code';return;}localStorage.setItem('s3432.chief',name);openRoom(name);};
+const saved=localStorage.getItem('s3432.chief');if(saved) openRoom(saved);
 </script></body></html>
